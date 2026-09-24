@@ -248,15 +248,23 @@ h1{font-size:1.4rem;margin:8px 0 8px;font-weight:800;letter-spacing:-.01em; colo
 
 <!-- Rules modal -->
 <div class="modal hidden" id="rulesModal">
-  <div class="modal-box" style="text-align:left">
-    <h2 style="text-align:center">Qaydalar</h2>
-    <p><b>Məqsəd:</b> Tapan şəxs müxtəlif gedişlər edərək gizli sözü tapmalıdır. Bu app sadəcə təsadüfi sözlər vermək və çarxı fırlatmaq üçündür. Qalan hər şey masa arxasında idarə olunur.</p>
-    <ul style="color: var(--muted); padding-left: 20px; font-size: 0.95rem; line-height: 1.5; margin-bottom: 24px;">
-        <li style="margin-bottom: 8px;">Müşahidəçi gizli söz seçir və yadda saxlayır.</li>
-        <li style="margin-bottom: 8px;">Tapan çarxı fırladıb şansına düşən gediş növünü edir (şifahi).</li>
-        <li style="margin-bottom: 8px;">Doğru/səhv cavabların dəyərləndirilməsini və ya hər hansı bir xal/pazl sistemini oyunçular öz aralarında masa üzərində idarə edirlər.</li>
+  <div class="modal-box" style="text-align:left; max-width: 440px;">
+    <h2 style="text-align:center">Oyun Qaydaları</h2>
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.5; margin-bottom: 12px;"><b>Rollar:</b> Oyunda iki tərəf var — <b>Sözü Tapan</b> və <b>Müşahidəçi</b>.</p>
+    
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.5; margin-bottom: 12px;"><b>Hazırlıq:</b> "Üstəgəl Kafe" loqosu dizaynında "Siz qalibsiniz" şəklindən ibarət 70 parçalıq pazl var. Onun yarısı (35 parça) əvvəlcədən qurulur. Pazl yarımçıq qurulduqdan sonra bu tətbiq açılır.</p>
+    
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.5; margin-bottom: 12px;"><b>Gedişat:</b> Müşahidəçi tətbiqdən təsadüfi söz seçir, kağıza yazır və Tapandan gizlədir. Tapan tərəf çarxı fırladıb "Gedişlər" əsasında təxminlər edərək sözü tapmağa çalışır.</p>
+    
+    <ul style="color: var(--coffee-dark); padding-left: 20px; font-size: 0.95rem; line-height: 1.5; margin-bottom: 16px; font-weight: 500;">
+        <li style="margin-bottom: 6px;">❌ Hər <b>səhv</b> gedişdə = <b>1 parça sökülür</b>.</li>
+        <li style="margin-bottom: 6px;">✅ Hər <b>düz</b> gedişdə = <b>1 parça əlavə olunur</b>.</li>
+        <li style="margin-bottom: 6px;">🎉 Söz bütövlükdə tapıldıqda = <b>5 ekstra parça qazanılır</b>.</li>
     </ul>
-    <button class="btn btn-teal" id="btnCloseRules" style="width:100%; margin-top: 16px;">Anladım</button>
+    
+    <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.5; margin-bottom: 24px;"><b>Nəticə:</b> Tapan tərəf pazlı tam tamamlayarsa (70 parça), <b>qalib olur</b>. Bütün parçalar sökülərsə (0 parça), <b>məğlub olur</b>. Hər iki halda oyun bitir, rollar dəyişir və yeni oyun başlayır.</p>
+    
+    <button class="btn btn-teal" id="btnCloseRules" style="width:100%; margin-top: 8px;">Anladım</button>
   </div>
 </div>
 
