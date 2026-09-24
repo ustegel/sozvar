@@ -56,6 +56,8 @@ body{
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(62, 39, 35, 0.1);
 }
+  border-bottom: 1px solid rgba(62, 39, 35, 0.1);
+}
 
 /* Logo styling */
 .logo-container {
@@ -69,9 +71,6 @@ body{
   height: auto;
   object-fit: contain;
 }
-
-.status{font-size:.75rem;color:var(--muted);background:var(--panel2);border:1px solid rgba(62,39,35,0.2);
-  padding:6px 12px;border-radius:999px; font-weight: 500;}
   
 h1{font-size:1.4rem;margin:8px 0 8px;font-weight:800;letter-spacing:-.01em; color: var(--coffee-dark); text-align: center;}
 .tagline{color:var(--muted);margin:0 0 20px;line-height:1.5;font-size:.9rem; text-align: center;}
@@ -90,9 +89,6 @@ h1{font-size:1.4rem;margin:8px 0 8px;font-weight:800;letter-spacing:-.01em; colo
 .btn-ghost{background:transparent;color:var(--coffee-dark);border:2px solid var(--coffee-dark);padding:12px 18px; box-shadow: none;}
 .btn-ghost:hover:not(:disabled){ background: rgba(62,39,35,0.05); box-shadow: none;}
 .btn-coral{background:var(--coral);color:#fff;}
-
-.card{background:var(--panel);border:1px solid rgba(62,39,35,0.15);border-radius:20px;padding:20px;margin-bottom:20px;
-  box-shadow: 0 8px 24px rgba(62,39,35,0.08);}
   
 .puzzle-outer{position:relative;max-width:100%;margin:0 auto 20px}
 .puzzle-grid{display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(5,1fr);
@@ -140,7 +136,7 @@ h1{font-size:1.4rem;margin:8px 0 8px;font-weight:800;letter-spacing:-.01em; colo
   
 /* Wheel Styling Adapted to Coffee Theme */
 .wheel-area{display:flex;flex-direction:column;align-items:center;gap:24px}
-.wheel-holder{position:relative;width:260px;height:260px; margin: 10px 0;}
+.wheel-holder{position:relative;width:280px;height:280px; margin: 10px 0; border-radius: 50%;}
 .wheel{width:100%;height:100%;border-radius:50%;position:relative;
   /* Coffee toned wheel gradient */
   background:conic-gradient(
@@ -155,37 +151,43 @@ h1{font-size:1.4rem;margin:8px 0 8px;font-weight:800;letter-spacing:-.01em; colo
   );
   border:6px solid var(--coffee-dark);
   box-shadow: 0 10px 20px rgba(62,39,35,0.2), inset 0 0 20px rgba(0,0,0,0.1);
-  transition:transform 3.5s cubic-bezier(.17,.67,.1,1.1);}
-  
-.wheel span{position:absolute;left:50%;top:50%;font-size:.65rem;font-weight:700;color:var(--coffee-dark);
-  width:100px;text-align:center;transform-origin:0 0; text-transform: uppercase;}
+  transition:transform 3.5s cubic-bezier(.17,.67,.1,1.1);
+  overflow: hidden;}
+
+/* Text labels will point from edge to center */
+.wheel span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140px; /* roughly radius */
+  height: 20px;
+  margin-top: -10px; /* half height to center vertically */
+  transform-origin: 0% 50%; /* Pivot around the exact center of the wheel */
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--coffee-dark);
+  text-align: right; /* push text towards the outer edge */
+  padding-right: 20px; /* distance from the very edge */
+  text-transform: uppercase;
+  line-height: 20px;
+}
   
 /* Make text readable on dark slices */
 .wheel span:nth-child(odd) { color: #fff; }
 
-.pointer{position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:0;height:0;
+.pointer{position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:0;height:0;
   border-left:14px solid transparent;border-right:14px solid transparent;border-top:24px solid var(--coral);z-index:2;
   filter: drop-shadow(0 4px 4px rgba(0,0,0,0.3));}
 
-.move-result{font-size:1.2rem;font-weight:800;color:var(--coffee-dark);margin:16px 0 12px;
-  background: var(--panel2); padding: 12px; border-radius: 12px;}
-  
-.guess-inputs{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0}
-.guess-inputs input{width:70px;padding:14px;border-radius:12px;border:2px solid var(--coffee-medium);
-  background:var(--panel);color:var(--coffee-dark);text-align:center;font-size:1.4rem;text-transform:lowercase;
-  font-weight: 700; transition: border-color 0.2s;}
-.guess-inputs input:focus { outline: none; border-color: var(--coffee-dark); box-shadow: 0 0 0 3px rgba(62,39,35,0.1);}
-.guess-inputs input.wide{width:100%;text-transform:none; font-size: 1.2rem;}
-
-.feedback{min-height:24px;font-weight:700;margin-top:8px; margin-bottom: 16px; font-size: 1.1rem;}
-.feedback.ok{color:var(--coffee-medium);}
-.feedback.bad{color:var(--coral);}
+.move-result{font-size:1.4rem;font-weight:800;color:var(--coffee-dark);margin:16px 0 12px;
+  background: var(--panel2); padding: 16px; border-radius: 12px; text-align:center;}
 
 .rules-btn{cursor:pointer;color:var(--muted);text-decoration:underline;font-size:.9rem;background:none;border:none; font-weight: 600; padding: 10px; margin-top: 10px; display: block; width: 100%; text-align: center;}
 .rules-btn:hover { color: var(--coffee-dark); }
 
 @media(max-width:480px){
-  .wheel-holder{width:220px;height:220px}
+  .wheel-holder{width:240px;height:240px}
+  .wheel span { width: 120px; font-size: .7rem; padding-right: 15px;}
   .card{padding: 16px;}
 }
 </style>
@@ -197,25 +199,14 @@ h1{font-size:1.4rem;margin:8px 0 8px;font-weight:800;letter-spacing:-.01em; colo
       <!-- Published Google Drawing URL provided in the prompt -->
       <img src="https://docs.google.com/drawings/d/e/2PACX-1vQYSOAxXzzVbRkPp6AyyWePdIWyiYBa335CM_Q9oB8zsiCmic62aCJ9QrKmh0KDyvLDZw599M52M4XE/pub?w=960&h=720" alt="Stəgəl Logo" onerror="this.src='https://placehold.co/600x200/FDFBF7/3E2723?text=Stəgəl+Coffee'">
     </div>
-    <div class="status" id="statusBar">Raund 1 · Söz seçilməyib</div>
   </div>
 
   <h1>Söz var, söz var</h1>
-  <p class="tagline">Müşahidəçi gizli sözü seçir, Tapan isə çarxı fırladıb gedişlər əsasında sözü tapmağa çalışır.</p>
+  <p class="tagline">Tərəflərdən biri "Söz seç", digəri "Gediş et" düyməsindən istifadə edir. Təxminlər və hesablamalar masa ətrafında üz-üzə aparılır.</p>
 
   <div class="actions">
-    <button class="btn btn-gold" id="btnPick">🔤 Söz seç (Müşahidəçi)</button>
-    <button class="btn btn-teal" id="btnMove" disabled>🎯 Gediş et (Tapan)</button>
-  </div>
-
-  <div class="card">
-    <div class="puzzle-outer">
-      <div class="puzzle-grid" id="puzzleGrid"></div>
-      <div class="win-banner" id="winBanner">🏆<br>SİZ QALİBSİNİZ!</div>
-    </div>
-    <div class="pieces-count" id="pieceCount">15 / 30 parça quruludur</div>
-    <div class="word-blanks" id="wordBlanks"></div>
-    <div class="log" id="log"></div>
+    <button class="btn btn-gold" id="btnPick">🔤 Təsadüfi Söz Seç</button>
+    <button class="btn btn-teal" id="btnMove">🎯 Çarxı Fırlat (Gediş al)</button>
   </div>
 
   <button class="rules-btn" id="btnRules">Oyun Qaydaları</button>
@@ -225,10 +216,10 @@ h1{font-size:1.4rem;margin:8px 0 8px;font-weight:800;letter-spacing:-.01em; colo
 <div class="modal hidden" id="secretModal">
   <div class="modal-box">
     <h2>Gizli söz seçildi</h2>
-    <p>Ekranı yalnız <b>Müşahidəçi</b> görsün. Sözə baxdıqdan sonra ekranı bağlayıb telefonu Tapan tərəfə göstərmədən uzaqlaşdırın.</p>
+    <p>Ekranı yalnız <b>Müşahidəçi</b> görsün. Sözə baxdıqdan sonra yadda saxlayın.</p>
     <button class="btn btn-gold" id="btnReveal" style="width:100%">👁 Sözü göstər</button>
     <div class="secret-word hidden" id="secretWord"></div>
-    <button class="btn btn-teal hidden" id="btnCloseSecret" style="width:100%;margin-top:16px">Bağla və oyuna başla</button>
+    <button class="btn btn-teal hidden" id="btnCloseSecret" style="width:100%;margin-top:16px">Bağla</button>
   </div>
 </div>
 
@@ -244,25 +235,14 @@ h1{font-size:1.4rem;margin:8px 0 8px;font-weight:800;letter-spacing:-.01em; colo
         </div>
       </div>
       <button class="btn btn-gold" id="btnSpin" style="width:100%; margin-top: 10px;">🎡 Fırlat</button>
+      <button class="btn btn-ghost" id="btnCancelWheel" style="width:100%; margin-top: 8px;">Bağla</button>
     </div>
     
     <div id="guessStage" class="hidden">
       <div class="move-result" id="moveResult"></div>
-      <div class="guess-inputs" id="guessInputs"></div>
-      <div class="feedback" id="feedback"></div>
-      <button class="btn btn-teal" id="btnSubmitGuess" style="width:100%;margin-top:8px">Təsdiqlə</button>
-      <button class="btn btn-ghost" id="btnCancelGuess" style="width:100%;margin-top:12px">Ləğv et</button>
+      <p style="margin-bottom: 20px;">Təxmininizi masa arxasında şifahi səsləndirin.</p>
+      <button class="btn btn-teal" id="btnEndMove" style="width:100%;">Bağla</button>
     </div>
-  </div>
-</div>
-
-<!-- End of round modal -->
-<div class="modal hidden" id="endModal">
-  <div class="modal-box">
-    <h2 id="endTitle" style="font-size: 1.8rem; margin-bottom: 8px;"></h2>
-    <p id="endText"></p>
-    <div class="secret-word" id="endWord"></div>
-    <button class="btn btn-gold" id="btnNextRound" style="width:100%">Yeni raund başlat (Rollar dəyişir)</button>
   </div>
 </div>
 
@@ -270,294 +250,110 @@ h1{font-size:1.4rem;margin:8px 0 8px;font-weight:800;letter-spacing:-.01em; colo
 <div class="modal hidden" id="rulesModal">
   <div class="modal-box" style="text-align:left">
     <h2 style="text-align:center">Qaydalar</h2>
-    <p><b>Məqsəd:</b> Tapan şəxs müxtəlif gedişlər edərək gizli sözü tapmalıdır.</p>
+    <p><b>Məqsəd:</b> Tapan şəxs müxtəlif gedişlər edərək gizli sözü tapmalıdır. Bu app sadəcə təsadüfi sözlər vermək və çarxı fırlatmaq üçündür. Qalan hər şey masa arxasında idarə olunur.</p>
     <ul style="color: var(--muted); padding-left: 20px; font-size: 0.95rem; line-height: 1.5; margin-bottom: 24px;">
-        <li style="margin-bottom: 8px;">30 parçalıq pazlın yarısı (15) əvvəlcədən quruludur.</li>
-        <li style="margin-bottom: 8px;">Müşahidəçi gizli söz seçir.</li>
-        <li style="margin-bottom: 8px;">Tapan çarxı fırladıb şansına düşən gediş növünü edir.</li>
-        <li style="margin-bottom: 8px;"><b>✅ Doğru gediş:</b> 1 parça əlavə olunur.</li>
-        <li style="margin-bottom: 8px;"><b>❌ Səhv gediş:</b> 1 parça sökülür.</li>
-        <li style="margin-bottom: 8px;"><b>🏆 Bütöv söz tapılarsa:</b> 5 parça birdən qazanılır.</li>
+        <li style="margin-bottom: 8px;">Müşahidəçi gizli söz seçir və yadda saxlayır.</li>
+        <li style="margin-bottom: 8px;">Tapan çarxı fırladıb şansına düşən gediş növünü edir (şifahi).</li>
+        <li style="margin-bottom: 8px;">Doğru/səhv cavabların dəyərləndirilməsini və ya hər hansı bir xal/pazl sistemini oyunçular öz aralarında masa üzərində idarə edirlər.</li>
     </ul>
-    <p>Pazl tam <b>30/30</b> olarsa <b>Tapan</b> qalib olur. Pazl <b>0/30</b>-a düşərsə <b>Tapan</b> məğlub olur. Hər raunddan sonra rollar dəyişir.</p>
     <button class="btn btn-teal" id="btnCloseRules" style="width:100%; margin-top: 16px;">Anladım</button>
   </div>
 </div>
 
 <script>
 const WORDS=["Qələm","Dəftər","Kitab","Silgi","Xətkeş","Çanta","Masa","Stul","Divan","Dolab","Yastıq","Yorğan","Döşək","Pərdə","Xalça","Süfrə","Boşqab","Stəkan","Fincan","Qaşıq","Çəngəl","Bıçaq","Qazan","Tava","Süzgəc","Çaydan","Fırça","Süpürgə","Vedrə","Səbət","Şüşə","Güzgü","Saat","Telefon","Kompüter","Klaviatura","Siçan","Ekran","Kamera","Qulaqlıq","Dinamik","Televizor","Pult","Şarj cihazı","Kabel","Lampa","Fənər","Batareya","Adapter","Printer","Zımba","Qayçı","Yapışqan","Möhür","Qovluq","Albom","Çərçivə","Açar","Kilid","Çətir","Eynək","Daraq","Sancağ","Düymə","Kəmər","Pulqabı","Çamadan","Papaq","Şərf","Köynək","Şalvar","Corab","Ayaqqabı","Əlcək","Çəkmə","Səndəl","Döşəmə","Pilləkən","Rəf","Asqı","Vaza","Dibçək","Çiçəkqabı","Şamdan","Saatlıq","Termos","Blender","Toster","Mikser","Soyuducu","Dondurucu","Soba","Ütü","Ventilyator","Kondisioner","Tozsoran","Çəkic","Tornavida","Kəlbətin","Mişar"];
-const MOVES=["Bir hərf təxmin et","Bütöv sözü təxmin et","Bir hərf təxmin et","İlk hərfi təxmin et","Bir hərf təxmin et","Son hərfi təxmin et","Bir hərf təxmin et","İki hərf təxmin et"];
-const TOTAL=30, COLS=6, ROWS=5;
-const norm=s=>(s||"").toLocaleLowerCase('az').trim();
-const isLetter=ch=>/\p{L}/u.test(ch);
+const MOVES=["1 Hərf", "Bütöv Söz", "1 Hərf", "İlk Hərf", "1 Hərf", "Son Hərf", "1 Hərf", "2 Hərf"];
 
-let round=1, team=1, word="", chars=[], revealedLetters=[], guessedSet=new Set(),
-    order=[], orderPos={}, revealedCount=0, wordFound=false, active=false, lastMove="";
-
-function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
+let word="", lastMove="";
 
 function setupWheelText() {
   const wheel = document.getElementById('wheel');
-  // Add labels to wheel slices
-  const labels = ["1 Hərf", "Söz", "1 Hərf", "İlk Hərf", "1 Hərf", "Son Hərf", "1 Hərf", "2 Hərf"];
   
-  labels.forEach((text, i) => {
+  MOVES.forEach((text, i) => {
     const span = document.createElement('span');
     span.textContent = text;
-    // Calculate rotation and translation to position text in the middle of each 45deg slice
-    // 45deg per slice. Center of slice i is (i * 45) + 22.5
-    // Text needs to be rotated by this amount, and then translated outward
-    // We adjust starting rotation so text reads upright where possible
-    const angle = i * 45 + 22.5;
-    span.style.transform = `translate(-50%, -50%) rotate(${angle - 90}deg) translateY(-85px) rotate(90deg)`;
+    // Each slice is 45 degrees. The pointer is at top (0 deg).
+    // The conic gradient draws slice 0 from 0 to 45 deg (center at 22.5 deg).
+    // The transform-origin is 0% 50% (left-center of the span, anchored at the wheel center).
+    // To align the text with the center of slice i, we rotate it by (i * 45 + 22.5) degrees.
+    // However, 0 degrees in CSS rotate usually points to 3 o'clock (right).
+    // Since our gradient starts at 12 o'clock (top), we subtract 90 degrees.
+    const angle = i * 45 + 22.5 - 90;
+    span.style.transform = `rotate(${angle}deg)`;
     wheel.appendChild(span);
   });
 }
 
-function buildPuzzle(){
-  const g=document.getElementById('puzzleGrid'); g.innerHTML="";
-  order=shuffle([...Array(TOTAL).keys()]); orderPos={}; order.forEach((v,i)=>orderPos[v]=i);
-  for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
-    const idx=r*COLS+c, piece=document.createElement('div'); piece.className='piece'; piece.dataset.idx=idx;
-    piece.style.backgroundPosition=`${c/(COLS-1)*100}% ${r/(ROWS-1)*100}%`;
-    const lid=document.createElement('div'); lid.className='lid'; 
-    piece.appendChild(lid);
-    g.appendChild(piece);
-  }
-}
-function renderPuzzle(){
-  document.querySelectorAll('.piece').forEach(p=>{
-    const idx=+p.dataset.idx;
-    p.classList.toggle('revealed', orderPos[idx] < revealedCount);
-  });
-  document.getElementById('pieceCount').textContent=`${revealedCount} / ${TOTAL} parça quruludur`;
-  document.getElementById('winBanner').classList.toggle('show', revealedCount>=TOTAL);
-}
-function renderBlanks(){
-  const wrap=document.getElementById('wordBlanks'); wrap.innerHTML="";
-  if(!word){return;}
-  chars.forEach((ch,i)=>{
-    if(!isLetter(ch)){const s=document.createElement('span');s.className='blank-space';wrap.appendChild(s);return;}
-    const d=document.createElement('div'); d.className='blank-char';
-    d.textContent=revealedLetters[i]?ch.toLocaleUpperCase('az'):"";
-    wrap.appendChild(d);
-  });
-}
-function log(msg,cls){
-  const l=document.getElementById('log'); const d=document.createElement('div'); d.className=cls||''; d.textContent=msg;
-  l.appendChild(d); l.scrollTop=0;
-}
-function setStatus(){
-  document.getElementById('statusBar').textContent = active
-    ? `Raund ${round} · Oyun başlayıb · Tapan gediş edir`
-    : `Raund ${round} · Söz seçilməyib`;
-}
-
 document.getElementById('btnPick').onclick=()=>{
   word = WORDS[Math.floor(Math.random()*WORDS.length)];
-  chars = word.split('');
-  revealedLetters = chars.map(ch=>!isLetter(ch));
-  guessedSet = new Set(); wordFound=false;
-  revealedCount=15; buildPuzzle(); renderPuzzle(); renderBlanks();
   document.getElementById('secretWord').classList.add('hidden');
   document.getElementById('secretWord').textContent=word;
   document.getElementById('btnReveal').classList.remove('hidden');
   document.getElementById('btnCloseSecret').classList.add('hidden');
   document.getElementById('secretModal').classList.remove('hidden');
 };
+
 document.getElementById('btnReveal').onclick=()=>{
   document.getElementById('secretWord').classList.remove('hidden');
   document.getElementById('btnReveal').classList.add('hidden');
   document.getElementById('btnCloseSecret').classList.remove('hidden');
 };
+
 document.getElementById('btnCloseSecret').onclick=()=>{
   document.getElementById('secretModal').classList.add('hidden');
-  active=true;
-  document.getElementById('btnPick').disabled=true;
-  document.getElementById('btnMove').disabled=false;
-  setStatus();
-  log(`Yeni söz seçildi (${chars.length} hərf).`);
 };
 
 document.getElementById('btnMove').onclick=()=>{
   document.getElementById('wheelStage').classList.remove('hidden');
   document.getElementById('guessStage').classList.add('hidden');
-  // Don't reset rotation to 0 to keep the physical feel of spinning from last position
   document.getElementById('wheelModal').classList.remove('hidden');
+};
+
+document.getElementById('btnCancelWheel').onclick=()=>{
+  document.getElementById('wheelModal').classList.add('hidden');
 };
 
 let spinDeg=0;
 document.getElementById('btnSpin').onclick=function(){
   this.disabled=true;
+  document.getElementById('btnCancelWheel').disabled=true;
+  
   const i=Math.floor(Math.random()*MOVES.length);
   lastMove=MOVES[i];
-  // Calculate stop angle so the chosen slice lands at top (0 deg)
-  // Each slice is 45deg. Slice 0 is 0-45deg (center 22.5).
-  // If we want slice i to be at top, we need to rotate backwards by its center angle
-  const segCenter=i*45+22.5;
-  // Add multiple full rotations (e.g., 5 * 360) plus the offset needed to reach the segment
-  // The wheel rotates clockwise. The pointer is at 0 degrees (top).
-  // To bring center of segment i to the top, rotation modulo 360 must be (360 - segCenter)
+  
+  // Center of the slice we want to land on
+  const segCenter = i * 45 + 22.5;
+  
   const currentMod = spinDeg % 360;
+  // Pointer is at 0 (top). To put segCenter under pointer, we rotate the wheel backwards by segCenter.
+  // Modulo arithmetic: target rotation should be (360 - segCenter) % 360
   const targetMod = (360 - segCenter) % 360;
   
-  // Calculate extra rotation needed to hit the target modulo in the next cycle
   let extraRotation = targetMod - currentMod;
   if (extraRotation <= 0) extraRotation += 360;
   
-  spinDeg += (360 * 5) + extraRotation; // 5 full spins + alignment
+  spinDeg += (360 * 5) + extraRotation; 
   
   document.getElementById('wheel').style.transform=`rotate(${spinDeg}deg)`;
+  
   setTimeout(()=>{
     this.disabled=false;
+    document.getElementById('btnCancelWheel').disabled=false;
     document.getElementById('wheelStage').classList.add('hidden');
     document.getElementById('guessStage').classList.remove('hidden');
     document.getElementById('moveResult').textContent="🎯 "+lastMove;
-    document.getElementById('feedback').textContent="";
-    buildGuessInputs(lastMove);
-  }, 3600); // Wait slightly longer for the new cubic bezier transition
+  }, 3600); 
 };
 
-function buildGuessInputs(move){
-  const box=document.getElementById('guessInputs'); box.innerHTML="";
-  if(move==="Bütöv sözü təxmin et"){
-    const inp=document.createElement('input'); inp.className='wide'; inp.placeholder="Sözü bütöv yazın"; inp.id='g1';
-    box.appendChild(inp);
-    setTimeout(()=>inp.focus(), 100);
-  } else if(move==="İki hərf təxmin et" || move==="Eyni anda iki hərf təxmin et"){
-    const a=document.createElement('input'); a.maxLength=1; a.id='g1'; a.placeholder="1";
-    const b=document.createElement('input'); b.maxLength=1; b.id='g2'; b.placeholder="2";
-    
-    // Auto advance focus
-    a.addEventListener('input', function() { if(this.value.length === 1) b.focus(); });
-    
-    box.appendChild(a); box.appendChild(b);
-    setTimeout(()=>a.focus(), 100);
-  } else {
-    const inp=document.createElement('input'); inp.maxLength=1; inp.id='g1'; inp.placeholder="?";
-    box.appendChild(inp);
-    setTimeout(()=>inp.focus(), 100);
-  }
-}
-
-function wordHasLetter(L){ return chars.some((ch,i)=>isLetter(ch)&&norm(ch)===L); }
-function revealLetter(L){ let found=false; chars.forEach((ch,i)=>{ if(isLetter(ch)&&norm(ch)===L){revealedLetters[i]=true; found=true;} }); return found; }
-function firstLetter(){ for(const ch of chars) if(isLetter(ch)) return ch; }
-function lastLetter(){ for(let i=chars.length-1;i>=0;i--) if(isLetter(chars[i])) return chars[i]; }
-
-document.getElementById('btnSubmitGuess').onclick=()=>{
-  let delta=0, correct=false, msg="";
-  const move=lastMove;
-  
-  if(move==="Bütöv sözü təxmin et"){
-    const g=norm(document.getElementById('g1').value);
-    if(!g) { msg="Zəhmət olmasa söz yazın."; return renderFeedback(msg,false); }
-    
-    if(g===norm(word)){ 
-        chars.forEach((ch,i)=>{if(isLetter(ch))revealedLetters[i]=true;}); 
-        correct=true; delta=5; msg="Düz! Bütöv söz tapıldı."; 
-    }
-    else { correct=false; delta=-1; msg="Səhv söz."; }
-  } 
-  else if(move==="İki hərf təxmin et" || move==="Eyni anda iki hərf təxmin et"){
-    const L1=norm(document.getElementById('g1').value), L2=norm(document.getElementById('g2').value);
-    if(!L1 || !L2) { msg="Hər iki hərfi daxil edin."; return renderFeedback(msg,false); }
-    
-    const p1=wordHasLetter(L1), p2=wordHasLetter(L2);
-    if(p1)revealLetter(L1); 
-    if(p2)revealLetter(L2);
-    
-    if(p1&&p2){correct=true;delta=1;msg="Hər iki hərf doğrudur!";} 
-    else if(p1||p2){correct=false;delta=-1;msg="Hərflərdən biri səhvdir.";}
-    else {correct=false;delta=-1;msg="Hər iki hərf səhvdir.";}
-  }
-  else { // Single letter variants
-    const L=norm(document.getElementById('g1').value);
-    if(!L){msg="Hərf daxil edin.";return renderFeedback(msg,false);}
-    
-    if(move==="Bir hərf təxmin et"){
-        if(guessedSet.has(L)){ delta=-1; correct=false; msg=`"${L.toUpperCase()}" artıq deyilib.`; }
-        else { 
-            guessedSet.add(L); 
-            if(revealLetter(L)){correct=true;delta=1;msg=`"${L.toUpperCase()}" doğrudur!`;} 
-            else {correct=false;delta=-1;msg=`"${L.toUpperCase()}" sözdə yoxdur.`;} 
-        }
-    } 
-    else if(move==="İlk hərfi təxmin et"){
-        const f=norm(firstLetter());
-        if(L===f){revealLetter(L);correct=true;delta=1;msg="İlk hərf doğrudur!";} 
-        else {correct=false;delta=-1;msg="İlk hərf səhvdir.";}
-    } 
-    else if(move==="Son hərfi təxmin et"){
-        const la=norm(lastLetter());
-        if(L===la){revealLetter(L);correct=true;delta=1;msg="Son hərf doğrudur!";} 
-        else {correct=false;delta=-1;msg="Son hərf səhvdir.";}
-    }
-  }
-  
-  const nowFull = chars.every((ch,i)=>!isLetter(ch)||revealedLetters[i]);
-  if(nowFull && !wordFound){ wordFound=true; delta=5; msg+=" 🎉 Söz tam tapıldı, +5 parça!"; }
-  
-  revealedCount=Math.max(0,Math.min(TOTAL,revealedCount+delta));
-  renderFeedback(msg,correct||delta===5);
-  renderPuzzle(); renderBlanks();
-  log((delta>0?"✅ ":"❌ ")+msg+` (${revealedCount}/${TOTAL})`, delta>0?'ok':'bad');
-  
-  setTimeout(()=>{
+document.getElementById('btnEndMove').onclick=()=>{
     document.getElementById('wheelModal').classList.add('hidden');
-    checkEnd();
-  },1500); // Give user time to read feedback
-};
-
-function renderFeedback(msg,ok){ 
-    const f=document.getElementById('feedback'); 
-    f.textContent=msg; 
-    f.className='feedback '+(ok?'ok':'bad'); 
-}
-
-document.getElementById('btnCancelGuess').onclick=()=>{
-    document.getElementById('wheelModal').classList.add('hidden');
-    log("Gediş ləğv edildi.", "");
-};
-
-function checkEnd(){
-  if(revealedCount>=TOTAL){
-    document.getElementById('endTitle').textContent="🏆 QƏLƏBƏ!";
-    document.getElementById('endTitle').style.color="var(--coffee-dark)";
-    document.getElementById('endText').textContent="Pazl tam tamamlandı! Gizli söz:";
-    document.getElementById('endWord').textContent=word;
-    document.getElementById('endModal').classList.remove('hidden');
-  } else if(revealedCount<=0){
-    document.getElementById('endTitle').textContent="💥 MƏĞLUBİYYƏT";
-    document.getElementById('endTitle').style.color="var(--coral)";
-    document.getElementById('endText').textContent="Pazl tamamilə söküldü. Gizli söz:";
-    document.getElementById('endWord').textContent=word;
-    document.getElementById('endModal').classList.remove('hidden');
-  }
-}
-document.getElementById('btnNextRound').onclick=()=>{
-  document.getElementById('endModal').classList.add('hidden');
-  round++; team = team===1?2:1; active=false; word=""; chars=[]; revealedLetters=[]; revealedCount=0;
-  buildPuzzle(); renderPuzzle(); renderBlanks();
-  document.getElementById('btnPick').disabled=false;
-  document.getElementById('btnMove').disabled=true;
-  document.getElementById('log').innerHTML="";
-  setStatus();
 };
 
 document.getElementById('btnRules').onclick=()=>document.getElementById('rulesModal').classList.remove('hidden');
 document.getElementById('btnCloseRules').onclick=()=>document.getElementById('rulesModal').classList.add('hidden');
 
-// Allow Enter key to submit guess
-document.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter' && !document.getElementById('guessStage').classList.contains('hidden')) {
-        document.getElementById('btnSubmitGuess').click();
-    }
-});
-
 // Initialization
 setupWheelText();
-buildPuzzle(); revealedCount=0; renderPuzzle(); setStatus();
 </script>
 </body>
 </html>
