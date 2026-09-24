@@ -2,7 +2,7 @@
 <html lang="az">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>Söz var, söz var</title>
 <style>
 :root{
@@ -11,29 +11,33 @@
   --text:#F5F1FF; --muted:#B7ACD6;
   --puzzle-bg: linear-gradient(135deg,#F5B942,#FF5D5D 40%,#34D1B4 75%,#6C5CE7);
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{height:100%}
 body{margin:0;background:radial-gradient(circle at 20% -10%,#2c1f52,var(--bg) 55%);color:var(--text);
-  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;min-height:100vh}
-.wrap{max-width:760px;margin:0 auto;padding:22px 18px 60px}
-.topbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:14px}
-.brand{font-weight:800;font-size:1.05rem;letter-spacing:.02em}
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;min-height:100%;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  display:flex;justify-content:center}
+.wrap{width:100%;max-width:440px;margin:0 auto;padding:16px 14px 40px}
+.topbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px;
+  position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;padding-top:4px}
+.brand{font-weight:800;font-size:1rem;letter-spacing:.02em}
 .brand span{color:var(--gold)}
-.status{font-size:.85rem;color:var(--muted);background:var(--panel);border:1px solid #3a2c63;
-  padding:6px 12px;border-radius:999px}
-h1{font-size:clamp(1.6rem,5vw,2.4rem);margin:4px 0 4px;font-weight:800;letter-spacing:-.01em}
-.tagline{color:var(--muted);margin:0 0 20px;line-height:1.5;font-size:.96rem}
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
-.btn{border:none;border-radius:14px;padding:16px 20px;font-size:1rem;font-weight:700;cursor:pointer;
-  flex:1;min-width:220px;transition:transform .15s,filter .15s;color:#1a1030}
+.status{font-size:.72rem;color:var(--muted);background:var(--panel);border:1px solid #3a2c63;
+  padding:5px 10px;border-radius:999px}
+h1{font-size:1.55rem;margin:4px 0 4px;font-weight:800;letter-spacing:-.01em}
+.tagline{color:var(--muted);margin:0 0 18px;line-height:1.5;font-size:.9rem}
+.actions{display:flex;flex-direction:column;gap:12px;margin-bottom:22px}
+.btn{border:none;border-radius:14px;padding:16px 18px;font-size:1rem;font-weight:700;cursor:pointer;
+  width:100%;transition:transform .15s,filter .15s;color:#1a1030}
 .btn:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.08)}
 .btn:active:not(:disabled){transform:translateY(0)}
 .btn:disabled{opacity:.4;cursor:not-allowed}
 .btn-gold{background:var(--gold)}
 .btn-teal{background:var(--teal)}
-.btn-ghost{background:transparent;color:var(--text);border:1px solid #4a3a78;flex:none;min-width:0;padding:12px 18px}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid #4a3a78;padding:12px 18px}
 .btn-coral{background:var(--coral);color:#2a0e0e}
-.card{background:var(--panel);border:1px solid #3a2c63;border-radius:18px;padding:20px;margin-bottom:18px}
-.puzzle-outer{position:relative;max-width:420px;margin:0 auto 18px}
+.card{background:var(--panel);border:1px solid #3a2c63;border-radius:16px;padding:16px;margin-bottom:16px}
+.puzzle-outer{position:relative;max-width:100%;margin:0 auto 16px}
 .puzzle-grid{display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(5,1fr);
   aspect-ratio:6/5;border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.4)}
 .piece{position:relative;background-image:var(--puzzle-bg);background-size:600% 500%}
