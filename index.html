@@ -28,6 +28,7 @@
   /* Puzzle background - coffee themed gradient */
   --puzzle-bg: linear-gradient(135deg, #D7CCC8, #A1887F 40%, #795548 75%, #5D4037);
 }
+
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{height:100%}
 body{
@@ -42,6 +43,7 @@ body{
   justify-content:center;
 }
 .wrap{width:100%;max-width:440px;margin:0 auto;padding:16px 14px 40px}
+
 .topbar{
   display:flex;
   flex-direction: column;
@@ -56,10 +58,7 @@ body{
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(62, 39, 35, 0.1);
 }
-  border-bottom: 1px solid rgba(62, 39, 35, 0.1);
-}
 
-/* Logo styling */
 .logo-container {
   width: 100%;
   max-width: 250px;
@@ -83,13 +82,12 @@ h1{font-size:1.4rem;margin:8px 0 8px;font-weight:800;letter-spacing:-.01em; colo
 .btn:active:not(:disabled){transform:translateY(0); box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
 .btn:disabled{opacity:.5;cursor:not-allowed; box-shadow: none; transform: none;}
 
-/* Button variants adapted to Coffee Theme */
 .btn-gold{background:var(--coffee-medium); color: #fff;}
 .btn-teal{background:var(--coffee-dark); color: #fff;}
 .btn-ghost{background:transparent;color:var(--coffee-dark);border:2px solid var(--coffee-dark);padding:12px 18px; box-shadow: none;}
 .btn-ghost:hover:not(:disabled){ background: rgba(62,39,35,0.05); box-shadow: none;}
 .btn-coral{background:var(--coral);color:#fff;}
-  
+
 .puzzle-outer{position:relative;max-width:100%;margin:0 auto 20px}
 .puzzle-grid{display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(5,1fr);
   aspect-ratio:6/5;border-radius:12px;overflow:hidden;
@@ -126,19 +124,35 @@ h1{font-size:1.4rem;margin:8px 0 8px;font-weight:800;letter-spacing:-.01em; colo
 .modal{position:fixed;inset:0;background:rgba(20,15,10,.8);display:flex;align-items:center;justify-content:center;
   padding:20px;z-index:50; backdrop-filter: blur(3px);}
 .modal.hidden{display:none}
-.modal-box{background:var(--bg);border:none;border-radius:24px;padding:32px 24px;max-width:400px;width:100%;
-  text-align:center; box-shadow: 0 20px 40px rgba(0,0,0,0.3);}
+
+.modal-box{
+  background:var(--bg);
+  border:none;
+  border-radius:24px;
+  padding:32px 24px;
+  max-width:400px;
+  width:100%;
+  text-align:center; 
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  /* MƏHZ BURA SCROLL ÜÇÜN ƏLAVƏ EDİLDİ */
+  max-height: calc(100vh - 40px); /* Ekrana sığması üçün hündürlük limiti */
+  overflow-y: auto; /* Daşma olarsa scroll yaranır */
+}
+
+/* Modal üçün kənar scrollbar dizaynı */
+.modal-box::-webkit-scrollbar { width: 6px; }
+.modal-box::-webkit-scrollbar-track { background: transparent; border-radius: 4px; margin: 16px 0; }
+.modal-box::-webkit-scrollbar-thumb { background: var(--coffee-light); border-radius: 4px;}
+
 .modal-box h2{margin-top:0;font-size:1.4rem; color: var(--coffee-dark); margin-bottom: 16px;}
 .modal-box p{color:var(--muted);font-size:1rem;line-height:1.6; margin-bottom: 24px;}
 
 .secret-word{font-size:2.2rem;font-weight:800;color:var(--coffee-dark);margin:24px 0;letter-spacing:.05em; text-transform: uppercase;
   background: var(--panel2); padding: 16px; border-radius: 12px; border: 2px dashed var(--coffee-medium);}
   
-/* Wheel Styling Adapted to Coffee Theme */
 .wheel-area{display:flex;flex-direction:column;align-items:center;gap:24px}
 .wheel-holder{position:relative;width:280px;height:280px; margin: 10px 0; border-radius: 50%;}
 .wheel{width:100%;height:100%;border-radius:50%;position:relative;
-  /* Coffee toned wheel gradient */
   background:conic-gradient(
     var(--coffee-medium) 0 45deg,
     var(--panel2) 45deg 90deg,
@@ -154,25 +168,23 @@ h1{font-size:1.4rem;margin:8px 0 8px;font-weight:800;letter-spacing:-.01em; colo
   transition:transform 3.5s cubic-bezier(.17,.67,.1,1.1);
   overflow: hidden;}
 
-/* Text labels will point from edge to center */
 .wheel span {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 140px; /* roughly radius */
+  width: 140px; 
   height: 20px;
-  margin-top: -10px; /* half height to center vertically */
-  transform-origin: 0% 50%; /* Pivot around the exact center of the wheel */
+  margin-top: -10px; 
+  transform-origin: 0% 50%; 
   font-size: .8rem;
   font-weight: 700;
   color: var(--coffee-dark);
-  text-align: right; /* push text towards the outer edge */
-  padding-right: 20px; /* distance from the very edge */
+  text-align: right; 
+  padding-right: 20px; 
   text-transform: uppercase;
   line-height: 20px;
 }
   
-/* Make text readable on dark slices */
 .wheel span:nth-child(odd) { color: #fff; }
 
 .pointer{position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:0;height:0;
@@ -196,7 +208,6 @@ h1{font-size:1.4rem;margin:8px 0 8px;font-weight:800;letter-spacing:-.01em; colo
 <div class="wrap">
   <div class="topbar">
     <div class="logo-container">
-      <!-- Published Google Drawing URL provided in the prompt -->
       <img src="https://docs.google.com/drawings/d/e/2PACX-1vQYSOAxXzzVbRkPp6AyyWePdIWyiYBa335CM_Q9oB8zsiCmic62aCJ9QrKmh0KDyvLDZw599M52M4XE/pub?w=960&h=720" alt="Stəgəl Logo" onerror="this.src='https://placehold.co/600x200/FDFBF7/3E2723?text=Stəgəl+Coffee'">
     </div>
   </div>
@@ -212,7 +223,6 @@ h1{font-size:1.4rem;margin:8px 0 8px;font-weight:800;letter-spacing:-.01em; colo
   <button class="rules-btn" id="btnRules">Oyun qaydaları</button>
 </div>
 
-<!-- Secret word modal -->
 <div class="modal hidden" id="secretModal">
   <div class="modal-box">
     <h2>Gizli söz seçildi</h2>
@@ -223,7 +233,6 @@ h1{font-size:1.4rem;margin:8px 0 8px;font-weight:800;letter-spacing:-.01em; colo
   </div>
 </div>
 
-<!-- Wheel / guess modal -->
 <div class="modal hidden" id="wheelModal">
   <div class="modal-box">
     <div id="wheelStage" class="wheel-area">
@@ -231,7 +240,6 @@ h1{font-size:1.4rem;margin:8px 0 8px;font-weight:800;letter-spacing:-.01em; colo
       <div class="wheel-holder">
         <div class="pointer"></div>
         <div class="wheel" id="wheel">
-          <!-- Text labels will be added by JS for better positioning -->
         </div>
       </div>
       <button class="btn btn-gold" id="btnSpin" style="width:100%; margin-top: 10px;">🎡 Fırlat</button>
@@ -246,7 +254,6 @@ h1{font-size:1.4rem;margin:8px 0 8px;font-weight:800;letter-spacing:-.01em; colo
   </div>
 </div>
 
-<!-- Rules modal -->
 <div class="modal hidden" id="rulesModal">
   <div class="modal-box" style="text-align:left; max-width: 440px;">
     <h2 style="text-align:center">Oyun Qaydaları</h2>
@@ -280,12 +287,6 @@ function setupWheelText() {
   MOVES.forEach((text, i) => {
     const span = document.createElement('span');
     span.textContent = text;
-    // Each slice is 45 degrees. The pointer is at top (0 deg).
-    // The conic gradient draws slice 0 from 0 to 45 deg (center at 22.5 deg).
-    // The transform-origin is 0% 50% (left-center of the span, anchored at the wheel center).
-    // To align the text with the center of slice i, we rotate it by (i * 45 + 22.5) degrees.
-    // However, 0 degrees in CSS rotate usually points to 3 o'clock (right).
-    // Since our gradient starts at 12 o'clock (top), we subtract 90 degrees.
     const angle = i * 45 + 22.5 - 90;
     span.style.transform = `rotate(${angle}deg)`;
     wheel.appendChild(span);
@@ -329,12 +330,9 @@ document.getElementById('btnSpin').onclick=function(){
   const i=Math.floor(Math.random()*MOVES.length);
   lastMove=MOVES[i];
   
-  // Center of the slice we want to land on
   const segCenter = i * 45 + 22.5;
   
   const currentMod = spinDeg % 360;
-  // Pointer is at 0 (top). To put segCenter under pointer, we rotate the wheel backwards by segCenter.
-  // Modulo arithmetic: target rotation should be (360 - segCenter) % 360
   const targetMod = (360 - segCenter) % 360;
   
   let extraRotation = targetMod - currentMod;
